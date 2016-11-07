@@ -1,5 +1,7 @@
 # Orderly Queue
 
+![Bus Queue](/media/bus-queue.jpg)
+
 > Implementation of a promise-based FIFO queuing system using ES2017 async generators.
 
-![Bus Queue](/media/bus-queue.jpg)
+> **npm:** `npm i orderly-queue -S`
