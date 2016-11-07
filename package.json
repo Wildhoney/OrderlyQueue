@@ -1,0 +1,27 @@
+{
+  "name": "orderly-queue",
+  "version": "0.1.0",
+  "description": "Implementation of a promise-based FIFO queuing system using ES2017 async generators.",
+  "main": "src/orderly-queue.js",
+  "scripts": {
+    "test": "ava test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wildhoney/OrderlyQueue.git"
+  },
+  "keywords": [
+    "queue",
+    "promise",
+    "tasks",
+    "task",
+    "sequence",
+    "enqueue"
+  ],
+  "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wildhoney/OrderlyQueue/issues"
+  },
+  "homepage": "https://github.com/Wildhoney/OrderlyQueue#readme"
+}
