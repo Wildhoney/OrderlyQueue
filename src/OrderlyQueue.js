@@ -18,10 +18,6 @@ export default function({ value, next = fn, error = fn }) {
      */
     const initialTask = () => Promise.resolve(value);
 
-    // Initiate the async generator, and move the cursor to the first yield.
-    const iterator = enqueue();
-    iterator.next();
-
     /**
      * @method enqueue
      * @param {Function} createTask
@@ -55,6 +51,10 @@ export default function({ value, next = fn, error = fn }) {
         }
 
     }
+
+    // Initiate the async generator, and move the cursor to the first yield.
+    const iterator = enqueue();
+    iterator.next();
 
     /**
      * @method add
