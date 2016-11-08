@@ -4,6 +4,12 @@
 
 > Implementation of a promise-based FIFO queuing system using ES2017 async generators.
 
+![Travis](http://img.shields.io/travis/Wildhoney/OrderlyQueue.svg?style=flat-square)
+&nbsp;
+![npm](http://img.shields.io/npm/v/orderly-queue.svg?style=flat-square)
+&nbsp;
+![License MIT](http://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat-square)
+
 > **npm:** `npm i orderly-queue -S`<br />
 > **Babel:** [`babel-plugin-syntax-async-generators`](https://www.npmjs.com/package/babel-plugin-syntax-async-generators)
 
