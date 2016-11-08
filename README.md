@@ -16,15 +16,42 @@
 * Takes a function that returns a promise (or `Promise.all`)
 * Invokes the promise and `yield`s the eventual result
 * Awaits the completion of the task before beginning the next
+* Implements a pseudo-observable for `next` and `error`
 
 # Usage
 
 ```javascript
 import Queue from 'orderly-queue';
 
-const queue = Queue();
+const queue = Queue({ value: ['Blueberries'], next: console.log });
 
-queue.add(() => Promise.resolve('Uno'));
-queue.add(() => Promise.resolve('Dos'));
-queue.add(() => Promise.resolve('Tres'));
+queue.add(fruits => Promise.resolve([...fruits, 'Apples']));
+queue.add(fruits => Promise.resolve([...fruits, 'Bananas']));
+queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
+
+// > ['Blueberries']
+// > ['Blueberries', 'Apples']
+// > ['Blueberries', 'Apples', 'Bananas']
+// > ['Blueberries', 'Apples', 'Bananas', 'Raspberries']
+```
+
+Each task will wait before the completion of the current task, meaning you can safely assume the order of `fruits` no matter how long it takes for a single task to complete.
+
+Any errors that are raised will be passed to the `error` function, but the items in the queue will continue to be invoked one-at-a-time passing in the `props` from the last successful invocation.
+
+```javascript
+import Queue from 'orderly-queue';
+
+const queue = Queue({ value: ['Blueberries'], next: console.log, error: console.log });
+
+queue.add(fruits => Promise.resolve([...fruits, 'Apples']));
+queue.add(fruits => Promise.reject('Fruitless...'));
+queue.add(fruits => Promise.resolve([...fruits, 'Bananas']));
+queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
+
+// > ['Blueberries']
+// > ['Blueberries', 'Apples']
+// > Fruitless...
+// > ['Blueberries', 'Apples', 'Bananas']
+// > ['Blueberries', 'Apples', 'Bananas', 'Raspberries']
 ```
