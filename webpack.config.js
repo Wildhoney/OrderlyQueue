@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './src/orderly-queue.js',
+    entry: './src/OrderlyQueue.js',
     output: {
         path: __dirname + '/dist',
         filename: 'orderly-queue.js',

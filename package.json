@@ -4,7 +4,8 @@
   "description": "Implementation of a promise-based FIFO queuing system using ES2017 async generators.",
   "main": "src/orderly-queue.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/Wildhoney/OrderlyQueue#readme",
   "devDependencies": {
     "ava": "^0.16.0",
+    "babel-loader": "^6.2.7",
     "babel-polyfill": "^6.16.0",
     "babel-register": "^6.18.0",
     "sinon": "^1.17.6",
