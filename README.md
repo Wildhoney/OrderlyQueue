@@ -39,7 +39,7 @@ Each task will wait before the completion of the current task, meaning you can s
 
 ## Errors
 
-Any errors that are raised will be passed to the `error` function, but the items in the queue will continue to be invoked one-at-a-time passing in the `props` from the last successful invocation.
+Any errors that are raised will be passed to the `error` function, however the items in the queue will continue to be invoked one-at-a-time passing in the `props` from the last successful invocation.
 
 ```javascript
 import Queue from 'orderly-queue';
