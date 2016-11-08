@@ -57,3 +57,13 @@ queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
 // > ['Blueberries', 'Apples', 'Bananas']
 // > ['Blueberries', 'Apples', 'Bananas', 'Raspberries']
 ```
+
+In cases where you wish to end the iterator early &mdash; perhaps due to an error being raised &mdash; you can invoke `return` on the `iterator` object.
+
+```javascript
+const queue = Queue({ value: ['Blueberries'], next: console.log, error: console.log });
+
+// ...
+
+queue.return();
+```
