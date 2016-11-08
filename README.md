@@ -37,6 +37,8 @@ queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
 
 Each task will wait before the completion of the current task, meaning you can safely assume the order of `fruits` no matter how long it takes for a single task to complete.
 
+## Errors
+
 Any errors that are raised will be passed to the `error` function, but the items in the queue will continue to be invoked one-at-a-time passing in the `props` from the last successful invocation.
 
 ```javascript
@@ -45,13 +47,13 @@ import Queue from 'orderly-queue';
 const queue = Queue({ value: ['Blueberries'], next: console.log, error: console.log });
 
 queue.add(fruits => Promise.resolve([...fruits, 'Apples']));
-queue.add(fruits => Promise.reject('Fruitless...'));
+queue.add(fruits => Promise.reject('Error: Fruitless...'));
 queue.add(fruits => Promise.resolve([...fruits, 'Bananas']));
 queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
 
 // > ['Blueberries']
 // > ['Blueberries', 'Apples']
-// > Fruitless...
+// > Error: Fruitless...
 // > ['Blueberries', 'Apples', 'Bananas']
 // > ['Blueberries', 'Apples', 'Bananas', 'Raspberries']
 ```
