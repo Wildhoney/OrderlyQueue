@@ -162,7 +162,9 @@ module.exports =
 	    return iterator.next(promiseFn);
 	  };
 
-	  return { process: process, iterator: iterator };
+	  return { process: process, stop: function stop() {
+	      return iterator.return();
+	    } };
 	};
 
 	function _asyncIterator(iterable) { if (typeof Symbol === "function") { if (Symbol.asyncIterator) { var method = iterable[Symbol.asyncIterator]; if (method != null) return method.call(iterable); } if (Symbol.iterator) { return iterable[Symbol.iterator](); } } throw new TypeError("Object is not async iterable"); }
