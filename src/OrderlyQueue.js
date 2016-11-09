@@ -67,6 +67,6 @@ export default function({ value, next = fn, error = fn }) {
         return iterator.next(promiseFn);
     };
 
-    return { process, iterator };
+    return { process, stop: () => iterator.return() };
 
 }

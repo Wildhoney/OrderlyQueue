@@ -77,3 +77,30 @@ test('It should be able to handle errors;', t => {
     });
 
 });
+
+test('It should be able to stop the generator when invoking `stop`;', t => {
+
+    const { queue, increment, next } = t.context;
+
+    queue.process(increment);
+    queue.process(increment);
+    queue.stop();
+    queue.process(increment);
+
+    return new Promise(resolve => {
+
+        setTimeout(() => {
+
+            t.is(next.callCount, 3);
+            t.true(next.calledWith(0));
+            t.true(next.calledWith(1));
+            t.true(next.calledWith(2));
+            t.falsy(next.calledWith(3));
+
+            resolve();
+
+        });
+
+    });
+
+});
