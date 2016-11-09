@@ -1,6 +1,6 @@
 {
   "name": "orderly-queue",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Implementation of a promise-based FIFO queuing system using ES2017 async generators.",
   "main": "src/orderly-queue.js",
   "scripts": {
