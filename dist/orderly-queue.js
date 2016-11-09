@@ -56,12 +56,12 @@ module.exports =
 	exports.default = function (_ref) {
 
 	  /**
-	   * @method enqueue
+	   * @method queue
 	   * @param {Function} createTask
 	   * @param {Object} [props]
-	   * @yield {*}
+	   * @yield {void}
 	   */
-	  var enqueue = function () {
+	  var queue = function () {
 	    var _ref2 = _asyncGenerator.wrap(regeneratorRuntime.mark(function _callee() {
 	      var createTask = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialTask;
 	      var props = arguments[1];
@@ -78,18 +78,18 @@ module.exports =
 	              task = _context.sent;
 
 
-	              // Publish the result of the task to the subscription.
+	              // Publish the resolved value of the task to the subscription.
 	              next(task);
 
 	              // Recursively invoke the generator, passing in the props received from the last
 	              // invocation.
 	              _context.next = 7;
-	              return;
+	              return task;
 
 	            case 7:
 	              _context.t0 = _context.sent;
 	              _context.t1 = task;
-	              _context.t2 = enqueue(_context.t0, _context.t1);
+	              _context.t2 = queue(_context.t0, _context.t1);
 	              _context.t3 = _asyncIterator(_context.t2);
 	              _context.t4 = _asyncGenerator.await;
 	              return _context.delegateYield(_asyncGeneratorDelegate(_context.t3, _context.t4), "t5", 13);
@@ -103,18 +103,18 @@ module.exports =
 	              _context.t6 = _context["catch"](0);
 
 
-	              // Task rejected the promise with a potential reason, which we'll publish to the
-	              // subscription.
+	              // Publish the rejected value of the task to the subscription.
 	              error(_context.t6);
 
-	              // Any further invocations will simply continue from the last success.
+	              // Any further invocations will simply continue from the last successful task, which
+	              // allows recovery from any promise rejections.
 	              _context.next = 20;
-	              return;
+	              return _context.t6;
 
 	            case 20:
 	              _context.t7 = _context.sent;
 	              _context.t8 = props;
-	              _context.t9 = enqueue(_context.t7, _context.t8);
+	              _context.t9 = queue(_context.t7, _context.t8);
 	              _context.t10 = _asyncIterator(_context.t9);
 	              _context.t11 = _asyncGenerator.await;
 	              return _context.delegateYield(_asyncGeneratorDelegate(_context.t10, _context.t11), "t12", 26);
@@ -127,7 +127,7 @@ module.exports =
 	      }, _callee, this, [[0, 15]]);
 	    }));
 
-	    return function enqueue(_x, _x2) {
+	    return function queue(_x, _x2) {
 	      return _ref2.apply(this, arguments);
 	    };
 	  }();
@@ -143,24 +143,26 @@ module.exports =
 
 
 	  /**
+	   * Initial task the yields the value that was passed in upon instantiation.
+	   *
 	   * @method initialTask
 	   * @return {Promise}
 	   */
 	  var initialTask = function initialTask() {
 	    return Promise.resolve(value);
-	  };var iterator = enqueue();
+	  };var iterator = queue();
 	  iterator.next();
 
 	  /**
-	   * @method add
+	   * @method process
 	   * @param {Function} promiseFn
-	   * @return {void}
+	   * @return {Promise}
 	   */
-	  var add = function add(promiseFn) {
-	    iterator.next(promiseFn);
+	  var process = function process(promiseFn) {
+	    return iterator.next(promiseFn);
 	  };
 
-	  return { add: add, iterator: iterator };
+	  return { process: process, iterator: iterator };
 	};
 
 	function _asyncIterator(iterable) { if (typeof Symbol === "function") { if (Symbol.asyncIterator) { var method = iterable[Symbol.asyncIterator]; if (method != null) return method.call(iterable); } if (Symbol.iterator) { return iterable[Symbol.iterator](); } } throw new TypeError("Object is not async iterable"); }
