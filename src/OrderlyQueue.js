@@ -26,20 +26,20 @@ export default function({ value, next = fn, error = fn }) {
      * @param {Object} [props]
      * @yield {void}
      */
-    async function* queue(createTask = initialTask, props) {
+    async function* queue(createTask, props) {
 
         try {
 
             // Invoke the next task, passing in either the default props, or the props from the
             // previous task, and awaits for its promise to be resolved.
-            const task = await createTask(props);
+            const result = await createTask(props);
 
             // Publish the resolved value of the task to the subscription.
-            next(task);
+            next(result);
 
             // Recursively invoke the generator, passing in the props received from the last
             // invocation.
-            yield* queue(yield task, task);
+            yield* queue(yield result, result);
 
         } catch (reason) {
 
@@ -55,7 +55,7 @@ export default function({ value, next = fn, error = fn }) {
     }
 
     // Initiate the async generator, and move the cursor to the first yield.
-    const iterator = queue();
+    const iterator = queue(initialTask);
     iterator.next();
 
     /**
