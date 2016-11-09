@@ -19,9 +19,9 @@ test('It should be able to process tasks one-by-one;', t => {
 
     const { queue, increment, next } = t.context;
 
-    queue.add(increment);
-    queue.add(increment);
-    queue.add(increment);
+    queue.process(increment).then(model => t.deepEqual(model, { value: 1, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 2, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 3, done: false }));
 
     return new Promise(resolve => {
 
@@ -45,15 +45,15 @@ test('It should be able to handle errors;', t => {
 
     const { queue, increment, throwError, next, error, reason } = t.context;
 
-    queue.add(increment);
-    queue.add(increment);
-    queue.add(increment);
-    queue.add(throwError);
-    queue.add(throwError);
-    queue.add(increment);
-    queue.add(increment);
-    queue.add(throwError);
-    queue.add(increment);
+    queue.process(increment).then(model => t.deepEqual(model, { value: 1, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 2, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 3, done: false }));
+    queue.process(throwError).then(model => t.deepEqual(model, { value: reason, done: false }));
+    queue.process(throwError).then(model => t.deepEqual(model, { value: reason, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 4, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 5, done: false }));
+    queue.process(throwError).then(model => t.deepEqual(model, { value: reason, done: false }));
+    queue.process(increment).then(model => t.deepEqual(model, { value: 6, done: false }));
 
     return new Promise(resolve => {
 
