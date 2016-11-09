@@ -25,9 +25,9 @@ import Queue from 'orderly-queue';
 
 const queue = Queue({ value: ['Blueberries'], next: console.log });
 
-queue.add(fruits => Promise.resolve([...fruits, 'Apples']));
-queue.add(fruits => Promise.resolve([...fruits, 'Bananas']));
-queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
+queue.process(fruits => Promise.resolve([...fruits, 'Apples']));
+queue.process(fruits => Promise.resolve([...fruits, 'Bananas']));
+queue.process(fruits => Promise.resolve([...fruits, 'Raspberries']));
 
 // > ['Blueberries']
 // > ['Blueberries', 'Apples']
@@ -46,10 +46,10 @@ import Queue from 'orderly-queue';
 
 const queue = Queue({ value: ['Blueberries'], next: console.log, error: console.log });
 
-queue.add(fruits => Promise.resolve([...fruits, 'Apples']));
-queue.add(fruits => Promise.reject('Error: Fruitless...'));
-queue.add(fruits => Promise.resolve([...fruits, 'Bananas']));
-queue.add(fruits => Promise.resolve([...fruits, 'Raspberries']));
+queue.process(fruits => Promise.resolve([...fruits, 'Apples']));
+queue.process(fruits => Promise.reject('Error: Fruitless...'));
+queue.process(fruits => Promise.resolve([...fruits, 'Bananas']));
+queue.process(fruits => Promise.resolve([...fruits, 'Raspberries']));
 
 // > ['Blueberries']
 // > ['Blueberries', 'Apples']
