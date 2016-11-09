@@ -62,10 +62,8 @@ module.exports =
 	   * @yield {void}
 	   */
 	  var queue = function () {
-	    var _ref2 = _asyncGenerator.wrap(regeneratorRuntime.mark(function _callee() {
-	      var createTask = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialTask;
-	      var props = arguments[1];
-	      var task;
+	    var _ref2 = _asyncGenerator.wrap(regeneratorRuntime.mark(function _callee(createTask, props) {
+	      var result;
 	      return regeneratorRuntime.wrap(function _callee$(_context) {
 	        while (1) {
 	          switch (_context.prev = _context.next) {
@@ -75,20 +73,20 @@ module.exports =
 	              return _asyncGenerator.await(createTask(props));
 
 	            case 3:
-	              task = _context.sent;
+	              result = _context.sent;
 
 
 	              // Publish the resolved value of the task to the subscription.
-	              next(task);
+	              next(result);
 
 	              // Recursively invoke the generator, passing in the props received from the last
 	              // invocation.
 	              _context.next = 7;
-	              return task;
+	              return result;
 
 	            case 7:
 	              _context.t0 = _context.sent;
-	              _context.t1 = task;
+	              _context.t1 = result;
 	              _context.t2 = queue(_context.t0, _context.t1);
 	              _context.t3 = _asyncIterator(_context.t2);
 	              _context.t4 = _asyncGenerator.await;
@@ -150,7 +148,7 @@ module.exports =
 	   */
 	  var initialTask = function initialTask() {
 	    return Promise.resolve(value);
-	  };var iterator = queue();
+	  };var iterator = queue(initialTask);
 	  iterator.next();
 
 	  /**
