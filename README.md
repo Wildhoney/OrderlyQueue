@@ -17,6 +17,7 @@
 * Invokes the promise and `yield`s the eventual result
 * Awaits the completion of the task before beginning the next
 * Implements a pseudo-observable for `next` and `error`
+* Passes the returned `props` along to the next task
 
 # Usage
 
