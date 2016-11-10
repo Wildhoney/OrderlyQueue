@@ -41,6 +41,22 @@ test('It should be able to process tasks one-by-one;', t => {
 
 });
 
+test('It should be able to process tasks one-by-one using async functions;', async t => {
+
+    const { queue, increment, next } = t.context;
+
+    t.deepEqual(await queue.process(increment), { value: 1, done: false });
+    t.deepEqual(await queue.process(increment), { value: 2, done: false });
+    t.deepEqual(await queue.process(increment), { value: 3, done: false });
+
+    t.is(next.callCount, 4);
+    t.true(next.calledWith(0));
+    t.true(next.calledWith(1));
+    t.true(next.calledWith(2));
+    t.true(next.calledWith(3));
+
+});
+
 test('It should be able to handle errors;', t => {
 
     const { queue, increment, throwError, next, error, reason } = t.context;
@@ -102,5 +118,12 @@ test('It should be able to stop the generator when invoking `stop`;', t => {
         });
 
     });
+
+});
+
+test('It should be able to throw an error when a non-function has been passed in;', t => {
+
+    const errorMessage = 'OrderlyQueue: Passed in task to `queue` must be a function that yields a promise.';
+    t.throws((() => t.context.queue.process('task')), errorMessage);
 
 });

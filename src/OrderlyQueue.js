@@ -5,6 +5,14 @@
 const fn = Function.prototype;
 
 /**
+ * @method message
+ * @param {String} message
+ */
+const message = message => {
+    return `OrderlyQueue: ${message}.`;
+};
+
+/**
  * @param {Object} [value]
  * @param {Function} [next]
  * @param {Function} [error]
@@ -64,7 +72,13 @@ export default function({ value, next = fn, error = fn }) {
      * @return {Promise}
      */
     const process = promiseFn => {
+
+        if (typeof promiseFn !== 'function') {
+            throw new Error(message('Passed in task to `queue` must be a function that yields a promise'));
+        }
+
         return iterator.next(promiseFn);
+
     };
 
     return { process, stop: () => iterator.return() };
