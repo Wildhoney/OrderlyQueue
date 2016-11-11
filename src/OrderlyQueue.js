@@ -13,12 +13,18 @@ const message = message => {
 };
 
 /**
+ * @constant defaultOptions
+ * @type {Object}
+ */
+const defaultOptions = { value: null, next: fn, error: fn };
+
+/**
  * @param {Object} [value = null]
  * @param {Function} [next = Function.prototype]
  * @param {Function} [error = Function.prototype]
  * @return {Object}
  */
-export default function({ value = null, next = fn, error = fn }) {
+export default function({ value = null, next = fn, error = fn } = defaultOptions) {
 
     /**
      * Initial task the yields the value that was passed in upon instantiation.
