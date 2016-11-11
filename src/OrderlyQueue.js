@@ -13,12 +13,12 @@ const message = message => {
 };
 
 /**
- * @param {Object} [value]
- * @param {Function} [next]
- * @param {Function} [error]
+ * @param {Object} [value = null]
+ * @param {Function} [next = Function.prototype]
+ * @param {Function} [error = Function.prototype]
  * @return {Object}
  */
-export default function({ value, next = fn, error = fn }) {
+export default function({ value = null, next = fn, error = fn }) {
 
     /**
      * Initial task the yields the value that was passed in upon instantiation.
@@ -81,6 +81,6 @@ export default function({ value, next = fn, error = fn }) {
 
     };
 
-    return { process, stop: () => iterator.return() };
+    return { process, abort: () => iterator.return() };
 
 }

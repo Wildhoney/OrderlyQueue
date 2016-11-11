@@ -66,5 +66,5 @@ const queue = Queue({ value: ['Blueberries'], next: console.log, error: console.
 
 // ...
 
-queue.stop();
+queue.abort();
 ```

@@ -94,13 +94,13 @@ test('It should be able to handle errors;', t => {
 
 });
 
-test('It should be able to stop the generator when invoking `stop`;', t => {
+test('It should be able to abort the generator when invoking `abort`;', t => {
 
     const { queue, increment, next } = t.context;
 
     queue.process(increment);
     queue.process(increment);
-    queue.stop();
+    queue.abort();
     queue.process(increment);
 
     return new Promise(resolve => {
