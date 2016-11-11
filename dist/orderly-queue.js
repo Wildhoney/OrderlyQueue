@@ -133,7 +133,8 @@ module.exports =
 	    // Initiate the async generator, and move the cursor to the first yield.
 
 
-	    var value = _ref.value,
+	    var _ref$value = _ref.value,
+	        value = _ref$value === undefined ? null : _ref$value,
 	        _ref$next = _ref.next,
 	        next = _ref$next === undefined ? fn : _ref$next,
 	        _ref$error = _ref.error,
@@ -165,7 +166,7 @@ module.exports =
 	        return iterator.next(promiseFn);
 	    };
 
-	    return { process: process, stop: function stop() {
+	    return { process: process, abort: function abort() {
 	            return iterator.return();
 	        } };
 	};
@@ -189,9 +190,9 @@ module.exports =
 	};
 
 	/**
-	 * @param {Object} [value]
-	 * @param {Function} [next]
-	 * @param {Function} [error]
+	 * @param {Object} [value = null]
+	 * @param {Function} [next = Function.prototype]
+	 * @param {Function} [error = Function.prototype]
 	 * @return {Object}
 	 */
 
