@@ -59,7 +59,7 @@ queue.process(fruits => Promise.resolve([...fruits, 'Raspberries']));
 // > ['Blueberries', 'Apples', 'Bananas', 'Raspberries']
 ```
 
-In cases where you wish to end the iterator early you can invoke the `stop` method &mdash; perhaps in response to an error being raised. Any queued tasks will not be run.
+In cases where you wish to end the iterator early you can invoke the `abort` method &mdash; perhaps in response to an error being raised. Any queued tasks will not be run.
 
 ```javascript
 const queue = Queue({ value: ['Blueberries'], next: console.log, error: console.log });
