@@ -31,6 +31,7 @@
     "babel-polyfill": "^6.16.0",
     "babel-register": "^6.18.0",
     "sinon": "^1.17.6",
+    "webpack": "^2.1.0-beta.27",
     "zen-observable": "^0.3.0"
   },
   "ava": {
