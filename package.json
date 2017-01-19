@@ -5,7 +5,7 @@
   "main": "dist/orderly-queue.js",
   "scripts": {
     "test": "BABEL_ENV=test ava",
-    "build": "BABEL_ENV=build rollup -c rollup.config.js \"src/$npm_package_name.js\" --output $npm_package_main"
+    "build": "rollup -c rollup.config.js \"src/$npm_package_name.js\" --output $npm_package_main"
   },
   "repository": {
     "type": "git",

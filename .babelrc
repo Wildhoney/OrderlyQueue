@@ -1,11 +1,5 @@
 {
   "env": {
-    "build": {
-      "presets": [
-        "stage-3",
-        ["es2015", { "modules": false }]
-      ]
-    },
     "test": {
       "presets": [
         "stage-3",
