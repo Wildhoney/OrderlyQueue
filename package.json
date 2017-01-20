@@ -3,8 +3,9 @@
   "version": "0.1.9",
   "description": "Implementation of a promise-based FIFO queuing system using ES2017 async generators.",
   "main": "dist/orderly-queue.js",
+  "jsnext:main": "src/orderly-queue",
   "scripts": {
-    "test": "BABEL_ENV=test ava",
+    "test": "ava",
     "build": "rollup -c rollup.config.js \"src/$npm_package_name.js\" --output $npm_package_main"
   },
   "repository": {
@@ -31,12 +32,12 @@
   "homepage": "https://github.com/Wildhoney/OrderlyQueue#readme",
   "devDependencies": {
     "ava": "^0.17.0",
-    "babel-loader": "^6.2.7",
-    "babel-polyfill": "^6.16.0",
-    "babel-register": "^6.18.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-3": "^6.22.0",
     "rollup": "^0.41.4",
     "rollup-plugin-async": "^1.2.0",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-regenerator": "^0.3.0",
     "sinon": "^1.17.6",
     "zen-observable": "^0.3.0"
   },
@@ -45,10 +46,6 @@
       "tests/*.test.js",
       "tests/**/*.test.js",
       "!tests/karma/*.test.js"
-    ],
-    "require": [
-      "babel-register",
-      "babel-polyfill"
     ]
   }
 }

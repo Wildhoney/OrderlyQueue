@@ -1,6 +1,6 @@
 import test from 'ava';
 import { spy } from 'sinon';
-import Queue from '../src/orderly-queue';
+import Queue from '../dist/orderly-queue';
 
 test.beforeEach(t => {
 
